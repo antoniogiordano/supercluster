@@ -4,9 +4,10 @@ import { screenDist2LatLngDist } from './utils/latLng';
 import createTree from './utils/createTree';
 
 
-const createCluster = (x, y, points) => ({
+const createCluster = (id, x, y, points) => ({
   x, // cluster center
   y,
+  id,
   wx: x, // weighted cluster center
   wy: y,
   zoom: Infinity, // the last zoom the cluster was processed at
@@ -42,7 +43,7 @@ SuperCluster.prototype = {
   load(points) {
     // generate a cluster object for each point
     let clusters = points.map(
-      ({ ...pt, lat, lng }) => createCluster(lng, lat, [pt])
+      ({ ...pt, lat, lng, id }) => createCluster(id, lng, lat, [pt])
     );
 
     // cluster points on max zoom, then cluster the results on previous zoom, etc.;
@@ -122,7 +123,7 @@ SuperCluster.prototype = {
       }
 
       // form a cluster with neighbors
-      const cluster = createCluster(p.x, p.y, clusterPoints);
+      const cluster = createCluster(p.id, p.x, p.y, clusterPoints);
       invariant(clusterPoints.length === numPoints, 'clusterPoints.length === numPoints');
 
       // save weighted cluster center for display
