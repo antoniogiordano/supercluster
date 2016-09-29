@@ -1,6 +1,6 @@
 {
-  "name": "points-cluster",
-  "version": "0.1.4",
+  "name": "getapper-points-cluster",
+  "version": "0.0.1",
   "description": "A fork of supercluster mapbox library.",
   "main": "lib/index.js",
   "scripts": {
